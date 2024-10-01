@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "swa"
+version = "0.1.0"
+description = "Software for Halloween project 2024"
+authors = ["cahogan <cahogan16@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.1"
+pytest-django = "^4.9.0"
+pytest = "^8.3.3"
+pytest-env = "^1.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
