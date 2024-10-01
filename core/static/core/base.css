@@ -1,0 +1,43 @@
+:root {
+    --sweetwest-silver: #cacaca;
+    --sweetwest-red: #c22b27;
+    --sweetwest-gold: #ffbf27;
+    --sweetwest-blue: #304cb2;
+    --primary-color: white;
+    --accent-color: var(--sweetwest-blue);
+    --accent-color-transparent: #304cb293;
+    --background-neutral: #f1f1f1;
+    --font-color: var(--sweetwest-blue);
+    --font-family-headers: "Southwest Sans Bold", sans-serif;
+    --font-family-body: "Southwest Sans", "Arial", sans-serif;
+  }
+  
+*,
+*::before,
+*::after {
+    font-family: var(--font-family-body);
+    color: var(--font-color);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-neutral);
+    line-height: 1.5;
+    height: 100%;
+}
+
+.content {
+    padding: 1rem;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: var(--accent-color) solid 2px;
+    outline-offset: 0.05em;
+    box-shadow: none;
+}

@@ -3,6 +3,8 @@
     <head>
         {% load static %}
         <link href="https://db.onlinewebfonts.com/c/c859c465ada9969752e18ff8366b6b81?family=Southwest+Sans+Bold" rel="stylesheet"> 
+        <link rel="stylesheet" type=text/css href="{% static 'core/base.css' %}">
+        <link rel="shortcut icon" type="image/svg" href="{% static 'core/favicon.svg' %}"/>
         <title>{% block title %}Sweetwest Airlines{% endblock %}</title>
         {% block extra_styles %}{% endblock %}
     </head>
@@ -11,6 +13,7 @@
         <nav>
             <a href="/" style="padding: 1rem;">
                 Sweetwest
+                <img src="{% static 'core/favicon.svg' %}" height="30px" alt="SWA logo">
             </a>
             <ul>
                 <li><a href="/"></a></li>
