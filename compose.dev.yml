@@ -1,0 +1,30 @@
+version: '3.3'
+name: swa-dev
+
+services:
+  django:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    env_file:
+      - .env.dev
+    volumes:
+      - .:/swa
+      - static_volume:/swa/static
+    entrypoint: >
+      sh -c "python3 -u manage.py runserver 0.0.0.0:8000"
+
+  database:
+    image: postgres:16
+    restart: unless-stopped
+    expose:
+      - "5432"
+    env_file:
+      - .env.dev
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+volumes:
+  static_volume:
+  postgres_volume:
