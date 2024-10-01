@@ -14,6 +14,13 @@ pytest = "^8.3.3"
 pytest-env = "^1.1.5"
 psycopg = "^3.2.3"
 
+[tool.pytest.ini_options]
+minversion = "6.0"
+python_files = "test_*.py"
+DJANGO_SETTINGS_MODULE = "swa.settings"
+
+[tool.pytest_env]
+DJANGO_SECRET_KEY = 'insecure-testing-only-key'
 
 [build-system]
 requires = ["poetry-core"]
