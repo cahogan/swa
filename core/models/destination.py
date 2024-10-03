@@ -2,13 +2,28 @@ from django.db import models
 from .metadata import Metadata
 
 
-class Destination(Metadata):
+class CandyType(Metadata):
     id = models.AutoField(primary_key=True)
 
     # Relationships
 
     # Attributes
-    candy = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    current_stock = models.IntegerField()
+    
 
     def __str__(self):
-        return f"Destination {self.id}: {self.candy}"
+        return f"{self.name}"
+
+
+class Destination(Metadata):
+    id = models.AutoField(primary_key=True)
+
+    # Relationships
+    candy = models.ForeignKey("CandyType", on_delete=models.PROTECT)
+
+    # Attributes
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} ({self.candy})"
