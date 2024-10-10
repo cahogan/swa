@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div>
+    <h1>Flight management</h1>
+    {% if flight %}
+    <h2>{{ ticket.first_name }} {{ ticket.costume }}</h2>
+    <p>
+        Flight {{ flight.id }} departing from {{ flight.gate }}
+    </p>
+    {% else %}
+    <p>
+        Search for a flight by number:
+        <form action="/flight/" method="post">
+            {% csrf_token %}
+            <input type="text" name="id" placeholder="Flight number">
+            <input type="submit" value="Search">
+        </form>
+    </p>
+    {% endif %}
+</div>
+{% endblock %}
