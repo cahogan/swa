@@ -7,10 +7,11 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: white
 }
 
 nav a {
-    color: var(--font-color);
+    color: white;
     font-family: var(--font-family-headers); 
     text-decoration: none;
     font-size: 2.5em;
@@ -26,17 +27,16 @@ nav ul {
 
 nav li a {
     margin-right: 1rem;
-    color: var(--font-color);;
+    color: white;
     text-decoration: none;
-    font-size: 1.5em;
+    text-transform: uppercase;
+    font-size: 1em;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease;
-    border-radius: 1em
 }
 
 nav ul li a:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+    background-color: var(--sweetwest-blue-darker);
 }
 
 @media (max-width: 750px) {
