@@ -8,6 +8,7 @@ urlpatterns = [
     path("", core.views.home, name="home"),
     path("ticket/", core.views.ticket, name="ticket"),
     path("ticket/<int:ticket_id>/", core.views.ticket, name="ticket"),
+    path("book/", core.views.book_ticket, name="book"),
     path("flight/", core.views.flight, name="flight"),
     path("flight/<int:flight_id>/", core.views.flight, name="flight"),
 ]

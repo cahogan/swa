@@ -17,3 +17,5 @@ def ticket(request, ticket_id: int = None):
         else:
             context["ticket"] = ticket
         return render(request, "core/ticket.html", context)
+def book_ticket(request):
+    return render(request, "core/booking.html")
