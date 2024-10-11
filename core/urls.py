@@ -11,4 +11,5 @@ urlpatterns = [
     path("book/", core.views.book_ticket, name="book"),
     path("flight/", core.views.flight, name="flight"),
     path("flight/<int:flight_id>/", core.views.flight, name="flight"),
+    path("display/", core.views.display, name="display"),
 ]
