@@ -11,7 +11,6 @@ class CandyType(Metadata):
     name = models.CharField(max_length=100)
     current_stock = models.IntegerField()
     
-
     def __str__(self):
         return f"{self.name}"
 
@@ -21,9 +20,10 @@ class Destination(Metadata):
 
     # Relationships
     candy = models.ForeignKey("CandyType", on_delete=models.PROTECT)
+    code = models.CharField(max_length=3, blank=True, null=True)
 
     # Attributes
     name = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.name} ({self.candy})"
+        return f"{self.code} ({self.candy})"

@@ -1,13 +1,16 @@
 :root {
     --sweetwest-silver: #cacaca;
+    --sweetwest-silver-dark: #a0a0a0;
     --sweetwest-red: #c22b27;
     --sweetwest-gold: #ffbf27;
     --sweetwest-blue: #304cb2;
-    --primary-color: white;
-    --accent-color: var(--sweetwest-blue);
-    --accent-color-transparent: #304cb293;
-    --background-neutral: #f1f1f1;
-    --font-color: var(--sweetwest-blue);
+    --sweetwest-blue-darker: #294299;
+    --primary-color: var(--sweetwest-blue);
+    --accent-color: var(--sweetwest-gold);
+    --primary-color-transparent: #304cb293;
+    --secondary-color-transparent: #ffbe2790;
+    --background-neutral: white;
+    --font-color: black;
     --font-family-headers: "Southwest Sans Bold", sans-serif;
     --font-family-body: "Southwest Sans", "Arial", sans-serif;
   }
@@ -16,7 +19,6 @@
 *::before,
 *::after {
     font-family: var(--font-family-body);
-    color: var(--font-color);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
