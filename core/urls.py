@@ -1,5 +1,7 @@
 from django.urls import path
 import core.views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 app_name = "core"
@@ -12,4 +14,5 @@ urlpatterns = [
     path("flight/", core.views.flight, name="flight"),
     path("flight/<int:flight_id>/", core.views.flight, name="flight"),
     path("display/", core.views.display, name="display"),
-]
+    path("boarding/", core.views.boarding, name="boarding"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
