@@ -7,7 +7,24 @@
         <link rel="shortcut icon" type="image/svg" href="{% static 'core/favicon.svg' %}"/>
         <title>Sweetwest Airlines</title>
     </head>
-    <body>
-        <h1>Departures</h1>
+    <body class="stripey">
+        <table>
+            <tr>
+                <th>Flight</th>
+                <th>Destination</th>
+                <th>Departing At</th>
+                <th>Gate</th>
+                <th>Status</th>
+            </tr>
+            {% for flight in flights %}
+            <tr>
+                <td>SWA00{{ flight.id }}</td>
+                <td>{{ flight.destination }}</td>
+                <td>{{ flight.scheduled_departure }}</td>
+                <td>{{ flight.gate }}</td>
+                <td>On Time</td>
+            </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>
