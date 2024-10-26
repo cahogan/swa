@@ -17,7 +17,7 @@
         <img src="/media/{{ ticket.boarding_pass_preview }}"
         alt="Boarding pass preview for ticket {{ ticket.id }}">
     </div>
-    <button id="print-boarding-pass-button">Print Boarding Pass</button>
+    <button id="print-boarding-pass-button" data-ticket-id="{{ ticket.id }}">Print Boarding Pass</button>
     {% else %}
     <p>
         Search for a ticket by number:
@@ -29,4 +29,5 @@
     </p>
     {% endif %}
 </div>
+<script src="{% static 'core/built/ticket.js' %}"></script>
 {% endblock %}

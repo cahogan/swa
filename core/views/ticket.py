@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from core.models import Ticket, Flight
-from label_printer.label_printer.boarding_pass_printer import generate_boarding_pass
+from label_printer.label_printer.boarding_pass_printer import generate_boarding_pass, print_boarding_pass
 from io import BytesIO
 from django.core.files import File
+from PIL import Image
 
 
 def generate_boarding_pass_for_ticket(ticket_id: int):
@@ -88,3 +90,20 @@ def book_ticket(request):
         available_flights = Flight.objects.filter(actual_departure__isnull=True)
         context = {"flights": available_flights}
         return render(request, "core/booking.html", context)
+    
+
+def print_ticket(request, ticket_id: int):
+    if request.method == "POST":
+        try:
+            ticket = Ticket.objects.get(id=ticket_id)
+        except Ticket.DoesNotExist:
+            return JsonResponse({
+                "success": False,
+                "error": f"Ticket with ID {ticket_id} does not exist."
+                })
+        else:
+            pil_image = Image.open(ticket.boarding_pass_preview)
+            print_boarding_pass(pil_image)
+            return JsonResponse({"success": True})
+    else:
+        return JsonResponse({"success": False, "error": "Invalid request method."})
