@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% block extra_styles %}
+    {% load static %}
+    <link rel="stylesheet" type=text/css href="{% static 'core/form.css' %}">
+{% endblock %}
+{% block content %}
+<div>
+    <h1>Book a flight for a customer</h1>
+    <form action="/book/" method="post" class="form">
+        {% csrf_token %}
+        <div>
+            <div class="form-group">
+                <label for="customer_name">Name</label>
+                <input type="text" name="customer_name">
+            </div>
+            <div class="form-group">
+                <label for="customer_costume">Costume</label>
+                <input type="text" name="customer_costume">
+            </div>
+            <label for="tsa_precheck">TSA pre-check?</label>
+            <input type="checkbox" name="tsa_precheck">
+        </div>
+        <div class="form-group">
+            <label for="flight_id">Select a flight:</label>
+            <select name="flight_id">
+                {% if not flights %}
+                    <option value="" disabled>No flights available</option>
+                {% else %}
+                    {% for flight in flights %}
+                        <option value="{{ flight.id }}">{{ flight }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Book now">
+        </div>
+    </form>
+</div>
+{% endblock %}

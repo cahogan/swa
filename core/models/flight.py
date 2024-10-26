@@ -18,4 +18,4 @@ class Flight(Metadata):
     capacity = models.IntegerField()
 
     def __str__(self):
-        return f"Flight {self.id}: {self.destination} from {self.gate}"
+        return f"Flight {self.id}: {self.destination} at {self.scheduled_departure.strftime('%H:%M')}"

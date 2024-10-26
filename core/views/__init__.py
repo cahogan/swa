@@ -1,3 +1,4 @@
-from .home import home
-from .ticket import ticket
-from .flight import flight
+from .home import *
+from .ticket import *
+from .flight import *
+from .display import *
