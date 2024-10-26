@@ -1,4 +1,8 @@
 {% extends 'core/base.html' %}
+{% block extra_styles %}
+    {% load static %}
+    <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+{% endblock %}
 {% block content %}
 <div>
     <h1>Flight management</h1>
@@ -7,6 +11,7 @@
     <p>
         Flight {{ flight.id }} departing from {{ flight.gate }}
     </p>
+    <button><a href="/boarding/{{ flight.id }}">Start boarding</a></button>
     {% else %}
     <p>
         Search for a flight by number:

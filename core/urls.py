@@ -16,4 +16,5 @@ urlpatterns = [
     path("flight/<int:flight_id>/", core.views.flight, name="flight"),
     path("display/", core.views.display, name="display"),
     path("boarding/", core.views.boarding, name="boarding"),
+    path("boarding/<int:flight_id>/", core.views.boarding, name="boarding"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

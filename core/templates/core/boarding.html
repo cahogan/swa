@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block extra_styles %}
+    {% load static %}
+    <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+{% endblock %}
+{% block content %}
+<div>
+    {% if flight %}
+        <h1>Now boarding flight {{ flight.id }}</h1>
+        <p>
+            Scan a ticket:
+            <form action="/boarding/{{ flight.id }}/" method="post">
+                {% csrf_token %}
+                <input autofocus type="text" name="id" placeholder="Ticket number">
+                <input type="submit" value="Search">
+            </form>
+        </p>
+    {% else %}
+        <h1>Manage boarding</h1>
+        <p>
+            Search for a flight by number:
+            <form action="/flight/" method="post">
+                {% csrf_token %}
+                <input type="text" name="id" placeholder="Flight number">
+                <input type="submit" value="Search">
+            </form>
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
