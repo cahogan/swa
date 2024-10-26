@@ -1,4 +1,8 @@
 {% extends 'core/base.html' %}
+{% block extra_styles %}
+    {% load static %}
+    <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+{% endblock %}
 {% block content %}
 <div>
     <h1>Ticket information</h1>
@@ -8,6 +12,7 @@
         Your flight: #{{ ticket.flight.id }} departing from {{ ticket.flight.gate }}
         at {{ ticket.flight.scheduled_departure }} to {{ ticket.flight.destination }}
     </p>
+    <button id="print-boarding-pass-button">Print Boarding Pass</button>
     {% else %}
     <p>
         Search for a ticket by number:
