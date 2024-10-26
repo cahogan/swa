@@ -15,6 +15,7 @@ class Ticket(Metadata):
     boarding_group = models.CharField(max_length=1)
     boarding_position = models.IntegerField()
     has_boarded = models.BooleanField(default=False)
+    boarding_pass_preview = models.ImageField(upload_to="boarding_passes", blank=True, null=True)
     
     def __str__(self):
         return f"{self.first_name} {self.costume} on {self.flight}"

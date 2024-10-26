@@ -168,7 +168,7 @@ def generate_boarding_pass(
     draw.text(mm2d((149, 63)), f"{boarding_group}", font=font_large, stroke_width=2, fill=COLOR_BLACK)
     draw.text(mm2d((165-bp_w/2, 63)), bp_str, font=font_large, stroke_width=2, fill=COLOR_BLACK)
 
-    image.show()
+    # image.show()
 
     return image
 
@@ -181,4 +181,4 @@ def print_boarding_pass(image, printer_ip="192.168.1.173"):
         zd621.send_zpl(zpl_string)
 
 # Test it out!
-print_boarding_pass(generate_boarding_pass())
+# print_boarding_pass(generate_boarding_pass())

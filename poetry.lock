@@ -68,6 +68,21 @@ files = [
 ]
 
 [[package]]
+name = "pdf417"
+version = "0.8.1"
+description = "PDF417 2D barcode generator for Python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pdf417-0.8.1-py2.py3-none-any.whl", hash = "sha256:7d29114a87e19454a3e0e10aeb2297db46429e4ac7fb92671f6632455f0f76d3"},
+    {file = "pdf417-0.8.1.tar.gz", hash = "sha256:2d75d5f6e3c1e89bb5cf2b01ddb1c69dd0db1f3dfeb403dab8745e64f95b3758"},
+]
+
+[package.extras]
+pillow = ["Pillow (>=2)", "Pillow (>=2,<4)"]
+pillow-simd = ["Pillow-SIMD (>=2)", "Pillow-SIMD (>=2,<4)"]
+
+[[package]]
 name = "pillow"
 version = "11.0.0"
 description = "Python Imaging Library (Fork)"
@@ -198,6 +213,28 @@ pool = ["psycopg-pool"]
 test = ["anyio (>=4.0)", "mypy (>=1.11)", "pproxy (>=2.7)", "pytest (>=6.2.5)", "pytest-cov (>=3.0)", "pytest-randomly (>=3.5)"]
 
 [[package]]
+name = "pypdfium2"
+version = "4.30.0"
+description = "Python bindings to PDFium"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "pypdfium2-4.30.0-py3-none-macosx_10_13_x86_64.whl", hash = "sha256:b33ceded0b6ff5b2b93bc1fe0ad4b71aa6b7e7bd5875f1ca0cdfb6ba6ac01aab"},
+    {file = "pypdfium2-4.30.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:4e55689f4b06e2d2406203e771f78789bd4f190731b5d57383d05cf611d829de"},
+    {file = "pypdfium2-4.30.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4e6e50f5ce7f65a40a33d7c9edc39f23140c57e37144c2d6d9e9262a2a854854"},
+    {file = "pypdfium2-4.30.0-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:3d0dd3ecaffd0b6dbda3da663220e705cb563918249bda26058c6036752ba3a2"},
+    {file = "pypdfium2-4.30.0-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cc3bf29b0db8c76cdfaac1ec1cde8edf211a7de7390fbf8934ad2aa9b4d6dfad"},
+    {file = "pypdfium2-4.30.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f1f78d2189e0ddf9ac2b7a9b9bd4f0c66f54d1389ff6c17e9fd9dc034d06eb3f"},
+    {file = "pypdfium2-4.30.0-py3-none-musllinux_1_1_aarch64.whl", hash = "sha256:5eda3641a2da7a7a0b2f4dbd71d706401a656fea521b6b6faa0675b15d31a163"},
+    {file = "pypdfium2-4.30.0-py3-none-musllinux_1_1_i686.whl", hash = "sha256:0dfa61421b5eb68e1188b0b2231e7ba35735aef2d867d86e48ee6cab6975195e"},
+    {file = "pypdfium2-4.30.0-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:f33bd79e7a09d5f7acca3b0b69ff6c8a488869a7fab48fdf400fec6e20b9c8be"},
+    {file = "pypdfium2-4.30.0-py3-none-win32.whl", hash = "sha256:ee2410f15d576d976c2ab2558c93d392a25fb9f6635e8dd0a8a3a5241b275e0e"},
+    {file = "pypdfium2-4.30.0-py3-none-win_amd64.whl", hash = "sha256:90dbb2ac07be53219f56be09961eb95cf2473f834d01a42d901d13ccfad64b4c"},
+    {file = "pypdfium2-4.30.0-py3-none-win_arm64.whl", hash = "sha256:119b2969a6d6b1e8d55e99caaf05290294f2d0fe49c12a3f17102d01c441bd29"},
+    {file = "pypdfium2-4.30.0.tar.gz", hash = "sha256:48b5b7e5566665bc1015b9d69c1ebabe21f6aee468b509531c3c8318eeee2e16"},
+]
+
+[[package]]
 name = "pytest"
 version = "8.3.3"
 description = "pytest: simple powerful testing with Python"
@@ -289,7 +326,28 @@ files = [
     {file = "tzdata-2024.2.tar.gz", hash = "sha256:7d85cc416e9382e69095b7bdf4afd9e3880418a2413feec7069d533d6b4e31cc"},
 ]
 
+[[package]]
+name = "zebrafy"
+version = "1.2.1"
+description = "Python library for converting PDF and images to Zebra Programming Language (ZPL)"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "zebrafy-1.2.1-py3-none-any.whl", hash = "sha256:17bcd67fcd9b8f9432c0582ed233756b2925f853c5530a7f495b933638c663db"},
+    {file = "zebrafy-1.2.1.tar.gz", hash = "sha256:bc0f9c7bb2d94c8a5b80b8f51af23ca5d6d4801df21e17c51e6c880737d6e575"},
+]
+
+[package.dependencies]
+pillow = "*"
+pypdfium2 = ">=4.8.0"
+
+[package.extras]
+build = ["build", "setuptools (>=64)", "setuptools-scm (>=8)", "wheel"]
+docs = ["sphinx (>=7.0.0)", "sphinx-autodoc-typehints (>=2.0.0)", "sphinx-rtd-theme (>=2.0.0)"]
+lint = ["pre-commit"]
+test = ["pytest-cov"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e1cc5a9cced258f5d96ae1d9ff0fc22f525f33197dd8863c5a14ecdb8ad3973c"
+content-hash = "76cf13dfa0fcc3b7fd9f4434cfb5248c9cbe05a2bfb738f1c4564de76f6620a3"

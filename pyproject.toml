@@ -14,6 +14,8 @@ pytest = "^8.3.3"
 pytest-env = "^1.1.5"
 psycopg = "^3.2.3"
 pillow = "^11.0.0"
+zebrafy = "^1.2.1"
+pdf417 = "^0.8.1"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
