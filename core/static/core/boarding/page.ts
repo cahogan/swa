@@ -1,5 +1,5 @@
 import { fetchJsonFromBackend, getCookie } from '../standard/utils';
-import { addSuccessMessage, addErrorMessage } from '../standard/message';
+import { addSuccessMessage, addErrorMessage, clearMessages } from '../standard/message';
 
 
 function markTicketAsBoardedInTable(ticketId: number) {
@@ -26,19 +26,25 @@ function hookupTicketBoardingForm() {
                     { ticket_id: ticketId },
                     (response) => {
                         if (response.success) {
+                            clearMessages();
                             addSuccessMessage('Ticket boarded');
                             markTicketAsBoardedInTable(ticketId);
                         } else {
+                            clearMessages();
                             addErrorMessage(`Failed to board: ${response.messages}`);
                         }
                     },
                     (error) => {
+                        clearMessages();
                         alert('Failed to board');
                         addErrorMessage(`Failed to board: ${error}`);
                     }
                 );
-                boardingInput.disabled = false;
-                boardingInput.value = '';
+                setTimeout(() => {
+                    boardingInput.disabled = false;
+                    boardingInput.value = '';
+                    boardingInput.focus();
+                }, 500);
             }
         });
     }

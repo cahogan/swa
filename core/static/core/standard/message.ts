@@ -1,12 +1,14 @@
-export function addMessage(message, level) {
+export function addMessage(message, level, timeout = -1) {
     const messageBox = document.getElementById('dynamic-messages');
     const messageElement = document.createElement('li');
     messageElement.className = `alert alert-${level}`;
     messageElement.textContent = message;
     messageBox?.appendChild(messageElement);
-    setTimeout(() => {
-        messageElement.remove();
-    }, 5000);
+    if (timeout > 0) {
+        setTimeout(() => {
+            messageElement.remove();
+        }, timeout);
+    }
 }
 
 export function addSuccessMessage(message) {
@@ -15,4 +17,11 @@ export function addSuccessMessage(message) {
 
 export function addErrorMessage(message) {
     addMessage(message, 'error');
+}
+
+export function clearMessages() {
+    const messageBox = document.getElementById('dynamic-messages');
+    if (messageBox) {
+        messageBox.innerHTML = '';
+    }
 }
