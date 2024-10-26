@@ -24,7 +24,7 @@
                 </tr>
                 <tbody id="boarding-table">
                     {% for ticket in flight.ticket_set.all %}
-                        <tr>
+                        <tr id="ticket-{{ ticket.id }}">
                             <td>{{ ticket.boarding_group }}{{ ticket.boarding_position }}</td>
                             <td>{{ ticket.first_name }} {{ ticket.costume }}</td>
                             <td>{% if ticket.has_boarded %}✅{% else %}❌{% endif %}</td>
