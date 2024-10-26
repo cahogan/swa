@@ -1,0 +1,8 @@
+*.pyc
+.env.dev
+.env.prod
+.venv/
+db.sqlite3
+node_modules/
+**/built/
+media/
