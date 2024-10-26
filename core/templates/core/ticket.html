@@ -2,16 +2,21 @@
 {% block extra_styles %}
     {% load static %}
     <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/ticket.css' %}">
 {% endblock %}
 {% block content %}
 <div>
     <h1>Ticket information</h1>
     {% if ticket %}
-    <h2>{{ ticket.first_name }} {{ ticket.costume }}</h2>
+    <p>{{ ticket.first_name }} {{ ticket.costume }}</p>
     <p>
         Your flight: #{{ ticket.flight.id }} departing from {{ ticket.flight.gate }}
         at {{ ticket.flight.scheduled_departure }} to {{ ticket.flight.destination }}
     </p>
+    <div class="boarding-pass-preview">
+        <img src="/media/{{ ticket.boarding_pass_preview }}"
+        alt="Boarding pass preview for ticket {{ ticket.id }}">
+    </div>
     <button id="print-boarding-pass-button">Print Boarding Pass</button>
     {% else %}
     <p>
