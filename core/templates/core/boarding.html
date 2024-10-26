@@ -3,13 +3,17 @@
     {% load static %}
     <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
     <link rel="stylesheet" type=text/css href="{% static 'core/table.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/message.css' %}">
 {% endblock %}
 {% block content %}
+<ul id="dynamic-messages" class="message-list"></ul>
 <div>
     {% if flight %}
         <h1>Now boarding flight {{ flight.id }}</h1>
         <p>
             Scan a ticket:
+            <input autofocus type="text" id="boarding-input" 
+            data-flight-id="{{ flight.id }}" placeholder="Ticket scan">
         </p>
         <table>
             <thead>
@@ -41,4 +45,5 @@
         </p>
     {% endif %}
 </div>
+<script src="{% static 'core/built/boarding.js' %}"></script>
 {% endblock %}

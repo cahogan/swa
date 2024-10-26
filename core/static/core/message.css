@@ -1,0 +1,22 @@
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-error {
+    color: var(--sweetwest-red);
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-success {
+    color: var(--sweetwest-blue);
+    background-color: #d1dbff;
+    border-color: #93a9f9;
+}
+
+.message-list {
+    list-style-type: none;
+}
