@@ -2,6 +2,7 @@
 {% block extra_styles %}
     {% load static %}
     <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/table.css' %}">
 {% endblock %}
 {% block content %}
 <div>
@@ -9,12 +10,25 @@
         <h1>Now boarding flight {{ flight.id }}</h1>
         <p>
             Scan a ticket:
-            <form action="/boarding/{{ flight.id }}/" method="post">
-                {% csrf_token %}
-                <input autofocus type="text" name="id" placeholder="Ticket number">
-                <input type="submit" value="Search">
-            </form>
         </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seat</th>
+                    <th>Passenger</th>
+                    <th>Boarded?</th>
+                </tr>
+                <tbody id="boarding-table">
+                    {% for ticket in flight.ticket_set.all %}
+                        <tr>
+                            <td>{{ ticket.boarding_group }}{{ ticket.boarding_position }}</td>
+                            <td>{{ ticket.first_name }} {{ ticket.costume }}</td>
+                            <td>{% if ticket.has_boarded %}✅{% else %}❌{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
     {% else %}
         <h1>Manage boarding</h1>
         <p>

@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th {
+    background-color: var(--accent-color);
+    color: black;
+    font-weight: bold;
+    padding: 0.5rem;
+    border: 2px solid white;
+}
+
+td {
+    padding: 0.5rem;
+}
+
+tr:nth-child(even) {
+    background-color: var(--sweetwest-silver);
+}
