@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "label-printer"
+version = "0.1.0"
+description = ""
+authors = ["John McNelly <jkailimcnelly@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pillow = "^10.4.0"
+zpl = "^0.1.11"
+zebrafy = "^1.2.1"
+pdf417 = "^0.8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
