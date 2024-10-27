@@ -2,6 +2,7 @@
 {% block extra_styles %}
     {% load static %}
     <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/table.css' %}">
 {% endblock %}
 {% block content %}
 <div>
@@ -21,6 +22,29 @@
             <input type="submit" value="Search">
         </form>
     </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight number</th>
+                <th>Destination</th>
+                <th>Gate</th>
+                <th>Departure time</th>
+                <th>Arrival time</th>
+                <th>Capacity (booked / available)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flight_list %}
+            <tr>
+                <td><a href="/flight/{{ flight.id }}">{{ flight.id }}</a></td>
+                <td>{{ flight.destination }}</td>
+                <td>{{ flight.gate }}</td>
+                <td>{{ flight.scheduled_departure }}</td>
+                <td>{{ flight.scheduled_arrival }}</td>
+                <td>{{ flight.ticket_set.count }} / {{ flight.capacity }}</td>
+            </tr>
+            {% endfor %}
+    </table>
     {% endif %}
 </div>
 {% endblock %}

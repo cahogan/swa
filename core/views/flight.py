@@ -14,6 +14,8 @@ def flight(request, flight_id: int = None):
             flight = Flight.objects.get(id=flight_id)
         except Flight.DoesNotExist:
             flight = None
+            flight_list = Flight.objects.all()
+            context["flight_list"] = flight_list
         else:
             context["flight"] = flight
         return render(request, "core/flight.html", context)
