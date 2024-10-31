@@ -14,6 +14,7 @@ urlpatterns = [
     path("book/", core.views.book_ticket, name="book"),
     path("flight/", core.views.flight, name="flight"),
     path("flight/<int:flight_id>/", core.views.flight, name="flight"),
+    path("flight/<int:flight_id>/takeoff/", core.views.takeoff, name="takeoff"),
     path("display/", core.views.display, name="display"),
     path("boarding/", core.views.boarding, name="boarding"),
     path("boarding/<int:flight_id>/", core.views.boarding, name="boarding"),
