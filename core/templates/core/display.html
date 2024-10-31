@@ -9,7 +9,7 @@
         <link rel="stylesheet" type=text/css href="{% static 'core/display.css' %}">
     </head>
     <body class="stripey">
-        <table>
+        <table id="flights-table">
             <tr>
                 <th>Flight</th>
                 <th>Candy</th>
@@ -21,7 +21,7 @@
             </tr>
             {% for flight in flights %}
                 <tr id="flight-{{ flight.id}}">
-                    <td>SWA00{{ flight.id }}</td>
+                    <td>{{ flight.id }}</td>
                     <td class="image-cell"><img src="/media/{{ flight.destination.candy.logo }}" alt="{{ flight.destination.candy }} logo"></td>
                     <td>{{ flight.destination }}</td>
                     <td>{{ flight.scheduled_departure|date:"h:i A" }}</td>

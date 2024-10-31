@@ -34,8 +34,34 @@ function updateFlightRow(row, flight){
     }
 }
 
+function addCandyImage(newCell, candyUrl) {
+    const img = document.createElement('img');
+    img.className = "image-cell"
+    img.src = candyUrl;
+    img.alt = 'Candy Image';
+    newCell.appendChild(img);
+}
+
 function createNewFlightRow(table, flight){
-    console.log("Adding new flight row");
+    const newRow = table.insertRow();
+    newRow.id = `flight-${flight.id}`;
+    const newData = [flight.id, flight.candy_image, flight.destination, flight.scheduled_departure,
+                     flight.gate, flight.available_seats, flight.status];
+    // Cells are the following columns:
+    // Flight, Candy, Destination, Departing At, Gate, Available Seats, Status
+    for (let i = 0; i < newData.length; i++) {
+        const newCell = newRow.insertCell();
+        if (i === 1) {
+            addCandyImage(newCell, flight.candy_image);
+        }
+        else {
+            newCell.textContent = newData[i];
+        }
+        
+        if (i === 3 || i === 6) {
+            applyClassesForFlightStatus(newCell, flight.status);
+        }
+    }
 }
 
 function updateFlightsDisplay() {

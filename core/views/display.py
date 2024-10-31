@@ -35,8 +35,10 @@ def flight_serializer(flight):
     updated_departure = flight.scheduled_departure + timedelta(minutes=flight.delay_minutes) if flight.delay_minutes is not None else flight.scheduled_departure
     return {
         "id": flight.id,
-        "destination": flight.destination.name,
+        "candy_image": flight.destination.candy.logo.url,
+        "destination": str(flight.destination),
         "scheduled_departure": updated_departure.astimezone(ZoneInfo('America/Los_Angeles')).strftime("%I:%M %p"),
+        "gate": str(flight.gate),
         "updated_departure": flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')).strftime("%I:%M %p"),
         "available_seats": flight.available_seats,
         "status": flight.status
