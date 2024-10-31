@@ -46,7 +46,7 @@ def ticket(request, ticket_id: int = None):
         redirect_url = f"/ticket/{ticket_id}/"
         return redirect(redirect_url)
     else:
-        context = {}
+        context = {"ticket_list": Ticket.objects.filter(has_boarded=False)}
         try:
             ticket = Ticket.objects.get(id=ticket_id)
         except Ticket.DoesNotExist:
