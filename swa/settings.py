@@ -29,8 +29,9 @@ if os.getenv("DJANGO_DEBUG"):
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = []
-
+# Unsafe to run in production, but fine for a Halloween project :)
+ALLOWED_HOSTS = ["*"]
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Application definition
 
