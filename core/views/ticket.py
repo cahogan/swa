@@ -16,7 +16,7 @@ def generate_boarding_pass_for_ticket(ticket_id: int):
                     ticket_id=ticket.id,
                     lastname=ticket.costume,
                     firstname=ticket.first_name,
-                    gate=ticket.flight.gate,
+                    gate=ticket.flight.gate.id,
                     departure_datetime=ticket.flight.scheduled_departure,
                     boarding_datetime=ticket.flight.scheduled_departure,
                     confirmation_number="AWGLUD",
