@@ -57,8 +57,8 @@ def ticket(request, ticket_id: int = None):
 
 
 def get_boarding_position(current_bookings: int):
-    group = chr((current_bookings // 10) + 65)
-    number = (current_bookings % 10) + 1
+    group = chr((current_bookings // 9) + 65)
+    number = (current_bookings % 9) + 1
     return group, number
 
 
