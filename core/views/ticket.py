@@ -73,14 +73,14 @@ def book_ticket(request):
                 return redirect("/book/") #TODO: Add error message
             else:
                 current_bookings = flight.ticket_set.count()
-                checkbox = True if request.POST.get("tsa_precheck") is not None else False
+                checkbox = True if request.POST.get("standby") is not None else False
                 if current_bookings < flight.capacity:
                     group, number = get_boarding_position(current_bookings)
                     ticket = Ticket.objects.create(
                         flight=flight,
                         first_name=request.POST.get("customer_name"),
                         costume=request.POST.get("customer_costume"),
-                        tsa_precheck=checkbox,
+                        standby=checkbox,
                         boarding_group=group,
                         boarding_position=number,
                     )

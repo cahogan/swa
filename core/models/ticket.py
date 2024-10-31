@@ -11,7 +11,7 @@ class Ticket(Metadata):
     # Attributes
     first_name = models.CharField(max_length=100)
     costume = models.CharField(max_length=100)
-    tsa_precheck = models.BooleanField()
+    standby = models.BooleanField()
     boarding_group = models.CharField(max_length=1)
     boarding_position = models.IntegerField()
     has_boarded = models.BooleanField(default=False)
