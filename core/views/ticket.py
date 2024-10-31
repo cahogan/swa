@@ -73,10 +73,13 @@ def book_ticket(request):
             except Flight.DoesNotExist:
                 return redirect("/book/") #TODO: Add error message
             else:
-                current_bookings = flight.ticket_set.count()
+                current_bookings = flight.ticket_set.filter(boarding_position__isnull=False).count()
                 checkbox = True if request.POST.get("standby") is not None else False
-                if current_bookings < flight.capacity:
-                    group, number = get_boarding_position(current_bookings)
+                if (current_bookings < flight.capacity) or (checkbox is True):
+                    if checkbox is True: # Standby passengers are not assigned a boarding number
+                        group, number = "S", None
+                    else:
+                        group, number = get_boarding_position(current_bookings)
                     ticket = Ticket.objects.create(
                         flight=flight,
                         first_name=request.POST.get("customer_name"),
@@ -93,7 +96,7 @@ def book_ticket(request):
     else:
         available_flights = Flight.objects.filter(actual_departure__isnull=True).annotate(num_tickets=Count("ticket"))
         flights_with_capacity = [flight for flight in available_flights if flight.num_tickets < flight.capacity]
-        context = {"flights": flights_with_capacity}
+        context = {"flights": available_flights}
         return render(request, "core/booking.html", context)
     
 
