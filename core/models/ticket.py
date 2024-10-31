@@ -13,7 +13,7 @@ class Ticket(Metadata):
     costume = models.CharField(max_length=100)
     standby = models.BooleanField()
     boarding_group = models.CharField(max_length=1)
-    boarding_position = models.IntegerField()
+    boarding_position = models.IntegerField(blank=True, null=True)
     has_boarded = models.BooleanField(default=False)
     boarding_pass_preview = models.ImageField(upload_to="boarding_passes", blank=True, null=True)
     
