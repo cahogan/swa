@@ -6,6 +6,7 @@ from io import BytesIO
 from django.core.files import File
 from PIL import Image
 from django.db import transaction
+from django.db.models import Count
 
 
 def generate_boarding_pass_for_ticket(ticket_id: int):
@@ -89,8 +90,9 @@ def book_ticket(request):
                     return redirect("/book/") #TODO: Add error message
         return redirect(f"/ticket/{ticket.id}/")
     else:
-        available_flights = Flight.objects.filter(actual_departure__isnull=True)
-        context = {"flights": available_flights}
+        available_flights = Flight.objects.filter(actual_departure__isnull=True).annotate(num_tickets=Count("ticket"))
+        flights_with_capacity = [flight for flight in available_flights if flight.num_tickets < flight.capacity]
+        context = {"flights": flights_with_capacity}
         return render(request, "core/booking.html", context)
     
 
