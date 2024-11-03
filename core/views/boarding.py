@@ -16,6 +16,8 @@ def validate_ticket_can_board_flight(ticket, flight):
 
 class BoardingError(Exception):
     pass
+
+
 def mark_ticket_as_boarded(ticket_id: int, flight):
     try:
         ticket = Ticket.objects.get(id=ticket_id)
@@ -25,7 +27,8 @@ def mark_ticket_as_boarded(ticket_id: int, flight):
         with transaction.atomic():
             validate_ticket_can_board_flight(ticket, flight)
             ticket.has_boarded = True
-            ticket.destination.candy.current_stock -= 1
+            ticket.flight.destination.candy.current_stock = ticket.flight.destination.candy.current_stock - 1
+            ticket.flight.destination.candy.save()
             ticket.save()
 
 
