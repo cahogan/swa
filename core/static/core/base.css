@@ -45,3 +45,9 @@ button:focus {
     outline-offset: 0.05em;
     box-shadow: none;
 }
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

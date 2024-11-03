@@ -156,7 +156,12 @@ def generate_boarding_pass(
     draw.text(mm2d((188, 11)), f"{boarding_position}", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
     draw.text(mm2d((148, 3)), f"SWEETWEST AIRLINES", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
     draw.text(mm2d((148, 7)), f"OPEN SEATING", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
-    draw.text(mm2d((148, 19)), f"{lastname.upper()}/{firstname.upper()}", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
+    name_str = f"{lastname.upper()}/{firstname.upper()}"
+    if len(name_str) <= 15:
+        draw.text(mm2d((148, 19)), name_str, font=font_medium, stroke_width=1, fill=COLOR_BLACK)
+    else:
+        draw.text(mm2d((148, 14)), f"{lastname.upper()}/", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
+        draw.text(mm2d((148, 19)), f"{firstname.upper()}", font=font_medium, stroke_width=1, fill=COLOR_BLACK)
     draw.text(mm2d((148, 24)), f"CONF {confirmation_number}", font=font_medium, fill=COLOR_BLACK)
     draw.text(mm2d((148, 28)), f"{departure_datetime.strftime('%b %d, %Y')}", font=font_medium, fill=COLOR_BLACK)
     draw.text(mm2d((148, 34)), f"{flight_number} {departure_airport_city.upper()} {departure_airport_name.upper()}"[:25], font=font_small, fill=COLOR_BLACK)
@@ -172,10 +177,10 @@ def generate_boarding_pass(
 
     return image
 
-def print_boarding_pass(image, printer_ip="192.168.1.173"):
+def print_boarding_pass(image, printer_ip="10.3.2.123"):
     image_rotated = image.rotate(90, expand=True)
     # image_rotated.show()
-    zpl_string = ZebrafyImage(image_rotated, invert=True, pos_x=mm2d(12)).to_zpl()
+    zpl_string = ZebrafyImage(image_rotated, invert=True, pos_x=mm2d(0)).to_zpl()
     # print(zpl_string)
     with ZPLPrinter(printer_ip) as zd621:
         zd621.send_zpl(zpl_string)

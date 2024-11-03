@@ -10,6 +10,8 @@ th {
     font-weight: bold;
     padding: 0.5rem;
     border: 2px solid white;
+    position: sticky;
+    top: 0;
 }
 
 td {
@@ -18,4 +20,9 @@ td {
 
 tr:nth-child(even) {
     background-color: var(--sweetwest-silver);
+}
+
+.table-constraint {
+    height: 60vh;
+    overflow: scroll;
 }

@@ -3,6 +3,7 @@
     {% load static %}
     <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
     <link rel="stylesheet" type=text/css href="{% static 'core/ticket.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/table.css' %}">
 {% endblock %}
 {% block content %}
 <div>
@@ -17,7 +18,10 @@
         <img src="/media/{{ ticket.boarding_pass_preview }}"
         alt="Boarding pass preview for ticket {{ ticket.id }}">
     </div>
-    <button id="print-boarding-pass-button" data-ticket-id="{{ ticket.id }}">Print Boarding Pass</button>
+    <div class="flex-row">
+        <button id="print-boarding-pass-button" data-ticket-id="{{ ticket.id }}">Print Boarding Pass</button>
+        <button style="margin: 15px;"><a href="/book/">Book another ticket</a></button>
+    </div>
     {% else %}
     <p>
         Search for a ticket by number:
@@ -27,6 +31,29 @@
             <input type="submit" value="Search">
         </form>
     </p>
+    <div class="table-constraint">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticket number</th>
+                    <th>First name</th>
+                    <th>Costume</th>
+                    <th>Flight</th>
+                    <th>Standby?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in ticket_list %}
+                <tr>
+                    <td><a href="/ticket/{{ ticket.id }}">{{ ticket.id }}</a></td>
+                    <td>{{ ticket.first_name }}</td>
+                    <td>{{ ticket.costume }}</td>
+                    <td>{{ ticket.flight }}</td>
+                    <td>{{ ticket.standby }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
     {% endif %}
 </div>
 <script src="{% static 'core/built/ticket.js' %}"></script>

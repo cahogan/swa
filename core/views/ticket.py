@@ -5,6 +5,15 @@ from label_printer.label_printer.boarding_pass_printer import generate_boarding_
 from io import BytesIO
 from django.core.files import File
 from PIL import Image
+from django.db import transaction
+from django.db.models import Count
+from zoneinfo import ZoneInfo
+import random
+import string
+
+
+def make_random_confirmation_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
 
 def generate_boarding_pass_for_ticket(ticket_id: int):
@@ -16,10 +25,10 @@ def generate_boarding_pass_for_ticket(ticket_id: int):
                     ticket_id=ticket.id,
                     lastname=ticket.costume,
                     firstname=ticket.first_name,
-                    gate=ticket.flight.gate,
-                    departure_datetime=ticket.flight.scheduled_departure,
-                    boarding_datetime=ticket.flight.scheduled_departure,
-                    confirmation_number="AWGLUD",
+                    gate=ticket.flight.gate.id,
+                    departure_datetime=ticket.flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')),
+                    boarding_datetime=ticket.flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')),
+                    confirmation_number=make_random_confirmation_code(),
                     departure_airport_code="ARB",
                     departure_airport_city="Los Altos",
                     departure_airport_name="Arbor Aveport",
@@ -43,7 +52,7 @@ def ticket(request, ticket_id: int = None):
         redirect_url = f"/ticket/{ticket_id}/"
         return redirect(redirect_url)
     else:
-        context = {}
+        context = {"ticket_list": Ticket.objects.filter(has_boarded=False)}
         try:
             ticket = Ticket.objects.get(id=ticket_id)
         except Ticket.DoesNotExist:
@@ -57,37 +66,42 @@ def ticket(request, ticket_id: int = None):
 
 
 def get_boarding_position(current_bookings: int):
-    group = chr((current_bookings // 10) + 65)
-    number = (current_bookings % 10) + 1
+    group = chr((current_bookings // 9) + 65)
+    number = (current_bookings % 9) + 1
     return group, number
 
 
 def book_ticket(request):
     if request.method == "POST":
-        try:
-            flight = Flight.objects.prefetch_related("ticket_set").get(id=request.POST.get("flight_id"))
-        except Flight.DoesNotExist:
-            return redirect("/book/") #TODO: Add error message
-        else:
-            current_bookings = flight.ticket_set.count()
-            checkbox = True if request.POST.get("tsa_precheck") is not None else False
-            if current_bookings < flight.capacity:
-                group, number = get_boarding_position(current_bookings)
-                ticket = Ticket.objects.create(
-                    flight=flight,
-                    first_name=request.POST.get("customer_name"),
-                    costume=request.POST.get("customer_costume"),
-                    tsa_precheck=checkbox,
-                    boarding_group=group,
-                    boarding_position=number,
-                )
-                ticket.save()
-                generate_boarding_pass_for_ticket(ticket.id)
-            else:
+        with transaction.atomic():
+            try:
+                flight = Flight.objects.select_for_update().prefetch_related("ticket_set").get(id=request.POST.get("flight_id"))
+            except Flight.DoesNotExist:
                 return redirect("/book/") #TODO: Add error message
+            else:
+                current_bookings = flight.ticket_set.filter(boarding_position__isnull=False).count()
+                checkbox = True if request.POST.get("standby") is not None else False
+                if (current_bookings < flight.capacity) or (checkbox is True):
+                    if checkbox is True: # Standby passengers are not assigned a boarding number
+                        group, number = "S", None
+                    else:
+                        group, number = get_boarding_position(current_bookings)
+                    ticket = Ticket.objects.create(
+                        flight=flight,
+                        first_name=request.POST.get("customer_name"),
+                        costume=request.POST.get("customer_costume"),
+                        standby=checkbox,
+                        boarding_group=group,
+                        boarding_position=number,
+                    )
+                    ticket.save()
+                    generate_boarding_pass_for_ticket(ticket.id)
+                else:
+                    return redirect("/book/") #TODO: Add error message
         return redirect(f"/ticket/{ticket.id}/")
     else:
-        available_flights = Flight.objects.filter(actual_departure__isnull=True)
+        available_flights = Flight.objects.filter(actual_departure__isnull=True).annotate(num_tickets=Count("ticket"))
+        flights_with_capacity = [flight for flight in available_flights if flight.num_tickets < flight.capacity]
         context = {"flights": available_flights}
         return render(request, "core/booking.html", context)
     

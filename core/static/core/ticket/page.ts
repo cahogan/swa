@@ -1,10 +1,11 @@
 import { fetchJsonFromBackend, getCookie } from '../standard/utils';
 
 function hookupPrintBoardingPassButton() {
-    const printButton = document.getElementById('print-boarding-pass-button');
+    const printButton = document.getElementById('print-boarding-pass-button') as HTMLButtonElement;
     const csrftoken = getCookie('csrftoken');
     if (printButton && csrftoken) {
         printButton.addEventListener('click', () => {
+            printButton.disabled = true
             const ticketId = printButton.getAttribute('data-ticket-id');
             fetchJsonFromBackend(
                 csrftoken,
@@ -21,6 +22,9 @@ function hookupPrintBoardingPassButton() {
                     alert('Failed to print boarding pass');
                 }
             );
+            setTimeout(() => {
+                printButton.disabled = false
+            }, 3000)
         });
     }
 }
