@@ -9,7 +9,15 @@
 <ul id="dynamic-messages" class="message-list"></ul>
 <div>
     {% if flight %}
-        <h1>Now boarding flight {{ flight.id }}</h1>
+        <h1>Now boarding {{ flight }}</h1>
+        <p><ul style="list-style-type: none;">
+            <li>
+                Scheduled departure: {{ flight.scheduled_departure }}
+                {% if flight.delay_minutes %}
+                + {{ flight.delay_minutes }} minutes
+                {% endif %}
+            </li>
+        </ul></p>
         <p>
             Scan a ticket:
             <input autofocus type="text" id="boarding-input" 

@@ -46,7 +46,7 @@ def flight_serializer(flight):
 
 
 def display(request):
-    flights = Flight.objects.all()
+    flights = Flight.objects.filter(actual_departure__isnull=True)
     flights_augmented = [add_available_seats(add_status(flight)) for flight in flights]
     context = {
         "flights": flights_augmented # TODO: Filter out departures that have long since passed
