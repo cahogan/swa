@@ -8,3 +8,8 @@ button {
     cursor: pointer;
     display: block;
 }
+
+button a {
+    color: black;
+    text-decoration: none;
+}

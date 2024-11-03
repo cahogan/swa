@@ -1,5 +1,6 @@
 from django.db import models
 from .metadata import Metadata
+from zoneinfo import ZoneInfo
 
 
 class Flight(Metadata):
@@ -18,4 +19,5 @@ class Flight(Metadata):
     capacity = models.IntegerField()
 
     def __str__(self):
-        return f"Flight {self.id}: {self.destination} at {self.scheduled_departure.strftime('%H:%M')}"
+        adjusted_for_timezone = self.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles'))
+        return f"Flight {self.id}: {self.destination} at {adjusted_for_timezone.strftime('%H:%M %z')}"

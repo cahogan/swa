@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% block extra_styles %}
+    {% load static %}
+    <link rel="stylesheet" type=text/css href="{% static 'core/button.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/table.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'core/message.css' %}">
+{% endblock %}
+{% block content %}
+<ul id="dynamic-messages" class="message-list"></ul>
+<div>
+    {% if flight %}
+        <h1>Now boarding flight {{ flight.id }}</h1>
+        <p>
+            Scan a ticket:
+            <input autofocus type="text" id="boarding-input" 
+            data-flight-id="{{ flight.id }}" placeholder="Ticket scan">
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seat</th>
+                    <th>Passenger</th>
+                    <th>Boarded?</th>
+                </tr>
+                <tbody id="boarding-table">
+                    {% for ticket in flight.ticket_set.all %}
+                        <tr id="ticket-{{ ticket.id }}">
+                            <td>{{ ticket.boarding_group }}{{ ticket.boarding_position }}</td>
+                            <td>{{ ticket.first_name }} {{ ticket.costume }}</td>
+                            <td>{% if ticket.has_boarded %}✅{% else %}❌{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    {% else %}
+        <h1>Manage boarding</h1>
+        <p>
+            Search for a flight by number:
+            <form action="/flight/" method="post">
+                {% csrf_token %}
+                <input type="text" name="id" placeholder="Flight number">
+                <input type="submit" value="Search">
+            </form>
+        </p>
+    {% endif %}
+</div>
+<script src="{% static 'core/built/boarding.js' %}"></script>
+{% endblock %}

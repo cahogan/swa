@@ -1,53 +1,21 @@
 table {
     width: 100%;
     border-collapse: collapse;
+    margin: 1rem 0;
 }
 
 th {
-    background-color: var(--sweetwest-business);
-    color: var(--sweetwest-gold);
-    font-size: 1.2rem;
-}
-
-th, td {
-    padding: 0.5rem;
-    text-align: center;
-}
-
-tr {
-    color: white;
+    background-color: var(--accent-color);
+    color: black;
     font-weight: bold;
+    padding: 0.5rem;
+    border: 2px solid white;
 }
 
-tr:nth-child(odd) {
-    background-color: var(--sweetwest-blue);
+td {
+    padding: 0.5rem;
 }
 
 tr:nth-child(even) {
-    background-color: var(--sweetwest-blue-darkest);
-}
-
-td img {
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-}
-
-.image-cell {
-    padding: 0;
-    height: 2rem;
-}
-
-
-.stripey {
-    background-color: var(--sweetwest-blue);
-    background-image: linear-gradient(0deg, 
-        var(--sweetwest-blue-darkest) 25%,
-        var(--sweetwest-blue) 25%,
-        var(--sweetwest-blue) 50%,
-        var(--sweetwest-blue-darkest) 50%,
-        var(--sweetwest-blue-darkest) 75%,
-        var(--sweetwest-blue) 75%,
-        var(--sweetwest-blue) 100%);
-    background-size: 100% 10rem;
+    background-color: var(--sweetwest-silver);
 }
