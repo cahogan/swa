@@ -50,3 +50,26 @@ td img {
         var(--sweetwest-blue) 100%);
     background-size: 100% 10rem;
 }
+
+.flight-delayed {
+    color: var(--sweetwest-gold);
+}
+
+@keyframes blink {
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.flight-boarding {
+    color: lime;
+    animation: blink 1s ease infinite;
+  }
+
+.flight-last-call {
+    color: red;
+    animation: blink 1s ease infinite;
+}
