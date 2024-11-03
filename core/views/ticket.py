@@ -8,6 +8,7 @@ from PIL import Image
 from django.db import transaction
 from django.db.models import Count
 from zoneinfo import ZoneInfo
+from datetime import timedelta
 import random
 import string
 
@@ -27,7 +28,7 @@ def generate_boarding_pass_for_ticket(ticket_id: int):
                     firstname=ticket.first_name,
                     gate=ticket.flight.gate.id,
                     departure_datetime=ticket.flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')),
-                    boarding_datetime=ticket.flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')),
+                    boarding_datetime=ticket.flight.scheduled_departure.astimezone(ZoneInfo('America/Los_Angeles')) - timedelta(minutes=7),
                     confirmation_number=make_random_confirmation_code(),
                     departure_airport_code="ARB",
                     departure_airport_city="Los Altos",
